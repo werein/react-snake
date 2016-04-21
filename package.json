@@ -4,7 +4,7 @@
   "description": "Snake Component for React",
   "repository": {
     "type": "git",
-    "url": "https://github.com/werein/snake.git"
+    "url": "https://github.com/werein/react-snake.git"
   },
   "license": "MIT",
   "scripts": {
