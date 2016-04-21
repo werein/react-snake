@@ -1,7 +1,7 @@
 {
   "name": "snake",
-  "version": "0.0.0",
-  "description": "Snake Component",
+  "version": "1.0.0",
+  "description": "Snake Component for React",
   "repository": {
     "type": "git",
     "url": "https://github.com/werein/snake.git"
