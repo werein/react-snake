@@ -27,9 +27,18 @@ export default class Snake extends Component {
     clearInterval(this.interval);
   }
 
+  getContainerSize = () => {
+    const { width, height } = this.props
+    return {
+      width: width || window.innerWidth,
+      height: height || window.innerHeight
+    }
+  }
+
   setPosition = (direction, lastPosition) => {
-    const surfaceWidth = parseInt(window.innerWidth / this.state.size, 10);
-    const surfaceHeight = parseInt(window.innerHeight / this.state.size, 10);
+    const size = this.getContainerSize()
+    const surfaceWidth = parseInt(size.width / this.state.size, 10);
+    const surfaceHeight = parseInt(size.height / this.state.size, 10);
 
     switch (direction) {
       case 'left':
@@ -127,8 +136,9 @@ export default class Snake extends Component {
 
 
   generateApplePosition = () => {
-    const surfaceWidth = parseInt(window.innerWidth / this.state.size, 10);
-    const surfaceHeight = parseInt(window.innerHeight / this.state.size, 10);
+    const size = this.getContainerSize();
+    const surfaceWidth = parseInt(size.width / this.state.size, 10);
+    const surfaceHeight = parseInt(size.height / this.state.size, 10);
 
     return ([
       Math.floor(Math.random() * surfaceWidth),
@@ -159,8 +169,9 @@ export default class Snake extends Component {
   };
 
   gameLoop = () => {
-    const surfaceWidth = parseInt(window.innerWidth, 10);
-    const surfaceHeight = parseInt(window.innerHeight, 10);
+    const size = this.getContainerSize()
+    const surfaceWidth = parseInt(size.width, 10);
+    const surfaceHeight = parseInt(size.height, 10);
 
     this._context.clearRect(0, 0, surfaceWidth, surfaceHeight);
     this.advance();
@@ -173,15 +184,13 @@ export default class Snake extends Component {
   };
 
   render() {
-    const surfaceWidth = window.innerWidth;
-    const surfaceHeight = window.innerHeight;
-
+    const size = this.getContainerSize()
     return (
       <div>
         <input style={{ position: 'absolute', width: 0, height: 0, outline: '0 !important', border: 'none' }} ref="input" type="text" onKeyDown={ this.handleKeyDown } />
         { this.state.gameOver &&
           <div>
-            <div>GAME OVER you hacker</div>
+            <div>GAME OVER</div>
             <div onClick={ this.init }>Reset</div>
             <div>Score: { this.state.position.length } </div>
           </div>
@@ -190,8 +199,8 @@ export default class Snake extends Component {
           ref="canvas"
           onKeyDown={ this.handleKeyDown }
           onClick={ this.focusInput }
-          width={ surfaceWidth }
-          height={ surfaceHeight }
+          width={ size.width }
+          height={ size.height }
         />
       </div>
     );
